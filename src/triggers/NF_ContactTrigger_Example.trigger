@@ -8,13 +8,17 @@
 * Ver       Date        Author      Modification
 * 1.0       2017-05-09  Recruiter    Created the file/class
 */
-trigger NF_ContactTrigger_Example on Contact (
+trigger NF_ContactTrigger_Example on Account (
 	before insert, 
-	before update, 
 	before delete, 
 	after insert, 
 	after update, 
-	after delete, 
-	after undelete) {
-	NF_TriggerFactory.CreateHandlerAndExecute(Contact.sObjectType);
+	after delete)
+	
+	 {
+	if(trigger.isbefore && trigger.isinsert) {
+		ContactTriggerHanlder_Sample.contactMethod(Trigger.new);
+    }	
+		
+//	NF_TriggerFactory.CreateHandlerAndExecute(Contact.sObjectType);
 }
